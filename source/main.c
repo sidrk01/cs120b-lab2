@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 /*	Author: Sidharth Ramkumar (sramk002@ucr.edu)
  *	 *  Partner(s) Name: none 
  *	  *	Lab Section: 022
@@ -8,43 +8,50 @@
  *	      *	I acknowledge all content contained herein, excluding template or example
  *	       *	code, is my own original work.
  *	        */
-==========
->>>>>>> 1049854d3c4c8b5784a310b8b0ce9cd7608fb9cd
 #include <avr/io.h>
 #ifdef _SIMULATE_
 #include "simAVRHeader.h"
 #endif
 
 int main(void) {
-<<<<<<< HEAD
     /* Insert DDR and PORT initializations */   
     DDRA = 0x00; PORTA = 0xFF; // Configure port A's 8 pins as inputs
-    DDRC = 0xFF; PORTC = 0x00; //Configure port C's 8 pins as outputs, intializie to 0s
-unsigned char taken = 0x00;
-unsigned char cntavail = 0x00; //Temporary variable to assign the value to C 
+    DDRB = 0x00; PORTB = 0xFF; // B's 8 pins as inputs
+    DDRC = 0x00; PORTC = 0xFF; // C's 8 pins as inputs
+    DDRD = 0xFF; PORTD = 0x00; //Configure port D's 8 pins as outputs, intializie to 0s
+unsigned char tmpA = 0x00; //Temp val to hold A-C
+unsigned char tmpB = 0x00; 
+unsigned char tmpC = 0x00; 
 
-unsigned char tmpA = 0x00; //Temporary variable to hold A
+unsigned char cartwght = 0x00; //Temporary variable to assign the value to D
+unsigned char sumwght = 0x00;
+
     /* Insert your solution below */
     while (1) {
-tmpA = PINA;
-   taken = 0x00;
-   
-unsigned char i = 0x01;
+   tmpA = PINA;
+   tmpB = PINB;
+   tmpC = PINC;
 
-while (i <= 0x04){
-    if (tmpA & i){
-    taken = taken + 1;	
-	}
-i = i * 0x02;	
-}
-	cntavail = 0x04 - taken;
-	
-if (cntavail == 0x00 ){
-	cntavail = cntavail |  0x80;	
+sumwght = 0x00;
+cartwght = 0x00;
+
+//Exceeds 140kg and balanced
+sumwght = tmpA + tmpB + tmpC;
+ 
+if (sumwght > 0x8C){
+   if ((tmpA ^ tmpB) == 0){
+	if((tmpB ^ tmpC) == 0){
+	cartwght = 0x01;
+	}	
+    }	 
+}   
+
+//Diff A and C exceeds 80kg
+if ((tmpA - tmpC) > 0x50){
+   cartwght = 0x02;
 }
 
-PORTC = cntavail;
-    }
+PORTD = cartwght; 
+}
     return 1;
 }
-=======
