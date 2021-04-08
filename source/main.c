@@ -15,17 +15,25 @@
 int main(void) {
     /* Insert DDR and PORT initializations */
     DDRA = 0x00; PORTA = 0xFF; // Configure port A's 8 pins as inputs
-    DDRB = 0xFF; PORTB = 0x00; //Configure port B's 8 pins as outputs, intializie to 0s
-unsigned char tmpB = 0x00; //Temporary variable to hold the value of B 
-unsigned char tmpA = 0x00; //Temporary variable to hold 
+    DDRC = 0xFF; PORTC = 0x00; //Configure port C's 8 pins as outputs, intializie to 0s
+unsigned char shiftBit = 0x00;
+unsigned char i = 0x00;
+unsigned char cntavail = 0x00; //Temporary variable to assign the value to C 
+unsigned char tmpA = 0x00; //Temporary variable to hold A
     /* Insert your solution below */
     while (1) {
-    tmpA = PINA; 
-    if (tmpA == 0x01){
-    PORTB = 0x01;
-} else {
-    PORTB = 0x00;
+    tmpA = PINA & 0x0F;
+
+    while (i < 4){
+	shiftBit = tmpA >> i;
+	shiftBit = shiftBit & 0x01;
+
+	if (shiftBit == 0x01){
+	cntavail = cntavail + 1;
 }
+i = i + 1;
+}
+PORTC = cntavail;
 
     }
     return 0;
