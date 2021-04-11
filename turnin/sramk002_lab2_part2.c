@@ -14,28 +14,26 @@
 #endif
 
 int main(void) {
-    /* Insert DDR and PORT initializations */   
+    /* Insert DDR and PORT initializations */
     DDRA = 0x00; PORTA = 0xFF; // Configure port A's 8 pins as inputs
     DDRC = 0xFF; PORTC = 0x00; //Configure port C's 8 pins as outputs, intializie to 0s
 unsigned char taken = 0x00;
 unsigned char cntavail = 0x00; //Temporary variable to assign the value to C 
-
 unsigned char tmpA = 0x00; //Temporary variable to hold A
     /* Insert your solution below */
     while (1) {
 tmpA = PINA;
    taken = 0x00;
-   
-unsigned char i = 0x01;
 
-while (i <= 0x04){
+unsigned char i = 0x01;
+while (i <= 0x08){
     if (tmpA & i){
-    taken = taken + 1;	
-	}
-i = i * 0x02;	
+    taken = taken + 1;
+        }
+i = i * 0x02;
 }
-	cntavail = 0x04 - taken;
-	
+        cntavail = 0x04 - taken;
+
 PORTC = cntavail;
     }
     return 1;
