@@ -36,10 +36,6 @@ i = i * 0x02;
 }
 	cntavail = 0x04 - taken;
 	
-if (cntavail == 0x00 ){
-	cntavail = cntavail |  0x80;	
-}
-
 PORTC = cntavail;
     }
     return 1;
