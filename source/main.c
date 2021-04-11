@@ -2,7 +2,7 @@
 /*	Author: Sidharth Ramkumar (sramk002@ucr.edu)
  *	 *  Partner(s) Name: none 
  *	  *	Lab Section: 022
- *	   *	Assignment: Lab #2  Exercise #2
+ *	   *	Assignment: Lab #2  Exercise #4
  *	    *	Exercise Description: [optional - include for your own benefit]
  *	     *
  *	      *	I acknowledge all content contained herein, excluding template or example
@@ -34,8 +34,7 @@ unsigned char sumwght = 0x00;
 
 sumwght = 0x00;
 cartwght = 0x00;
-
-//Exceeds 140kg and balanced
+	    
 sumwght = tmpA + tmpB + tmpC;
  
 if (sumwght > 0x8C){
@@ -46,7 +45,6 @@ if (sumwght > 0x8C){
     }	 
 }   
 
-//Diff A and C exceeds 80kg
 if ((tmpA - tmpC) > 0x50){
    cartwght = 0x02;
 }
